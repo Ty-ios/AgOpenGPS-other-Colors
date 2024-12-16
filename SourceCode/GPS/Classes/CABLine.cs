@@ -391,7 +391,7 @@ namespace AgOpenGPS
             double cosHL = Math.Cos(abHeading + glm.PIBy2) * (widthMinusOverlap * 0.5 - shadowOffset);
 
             //shadow
-            GL.Color4(0.5, 0.5, 0.5, 0.3);
+            GL.Color4(0.0745, 0.3137, 0.7098, 0.1);
             GL.Begin(PrimitiveType.TriangleFan);
             {
                 GL.Vertex3(currentLinePtA.easting - sinHL, currentLinePtA.northing - cosHL, 0);
@@ -402,7 +402,7 @@ namespace AgOpenGPS
             GL.End();
 
             //shadow lines
-            GL.Color4(0.55, 0.55, 0.55, 0.3);
+            GL.Color4(0.0745, 0.3137, 0.7098, 0.1);
             GL.LineWidth(1);
             GL.Begin(PrimitiveType.LineLoop);
             {
@@ -416,7 +416,7 @@ namespace AgOpenGPS
             //draw current AB Line
             GL.LineWidth(lineWidth);
             GL.Begin(PrimitiveType.Lines);
-            GL.Color3(0.95f, 0.20f, 0.950f);
+            GL.Color3(0.631f, 0.553f, 0.224f);
             GL.Vertex3(currentLinePtA.easting, currentLinePtA.northing, 0.0);
             GL.Vertex3(currentLinePtB.easting, currentLinePtB.northing, 0.0);
             GL.End();

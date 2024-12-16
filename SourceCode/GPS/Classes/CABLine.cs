@@ -338,16 +338,16 @@ namespace AgOpenGPS
         public void DrawABLineNew()
         {
             //ABLine currently being designed
-                GL.LineWidth(lineWidth);
-                GL.Begin(PrimitiveType.Lines);
-                GL.Color3(0.95f, 0.70f, 0.50f);
-                GL.Vertex3(desLineEndA.easting, desLineEndA.northing, 0.0);
-                GL.Vertex3(desLineEndB.easting, desLineEndB.northing, 0.0);
-                GL.End();
+            GL.LineWidth(lineWidth);
+            GL.Begin(PrimitiveType.Lines);
+            GL.Color3(0.0745f, 0.3137f, 0.7098f);
+            GL.Vertex3(desLineEndA.easting, desLineEndA.northing, 0.0);
+            GL.Vertex3(desLineEndB.easting, desLineEndB.northing, 0.0);
+            GL.End();
 
-                GL.Color3(0.2f, 0.950f, 0.20f);
-                mf.font.DrawText3D(desPtA.easting, desPtA.northing, "&A");
-                mf.font.DrawText3D(desPtB.easting, desPtB.northing, "&B");
+            GL.Color3(0.0745f, 0.3137f, 0.7098f);
+            mf.font.DrawText3D(desPtA.easting, desPtA.northing, "&A");
+            mf.font.DrawText3D(desPtB.easting, desPtB.northing, "&B");
         }
 
         public void DrawABLines()
@@ -356,11 +356,11 @@ namespace AgOpenGPS
             GL.PointSize(8.0f);
             GL.Begin(PrimitiveType.Points);
 
-            GL.Color3(0.0f, 0.90f, 0.95f);
+            GL.Color3(1.0f, 0.0f, 0.0f);
             GL.Vertex3(mf.trk.gArr[mf.trk.idx].ptB.easting, mf.trk.gArr[mf.trk.idx].ptB.northing, 0.0);
-            GL.Color3(0.95f, 0.0f, 0.0f);
+            GL.Color3(1.0f, 0.0f, 0.0f);
             GL.Vertex3(mf.trk.gArr[mf.trk.idx].ptA.easting, mf.trk.gArr[mf.trk.idx].ptA.northing, 0.0);
-            //GL.Color3(0.00990f, 0.990f, 0.095f);
+            //GL.Color3(1.0f,0.0f,0.0f);
             //GL.Vertex3(mf.bnd.iE, mf.bnd.iN, 0.0);
             GL.End();
 
@@ -376,8 +376,15 @@ namespace AgOpenGPS
             GL.LineWidth(4);
             GL.Enable(EnableCap.LineStipple);
             GL.LineStipple(1, 0x0F00);
+            //
+            //
+            // macht aus Stichellinien Durchgezogene von Louis
+            GL.Disable(EnableCap.LineStipple); // Deaktiviert das Linienstippen, damit durchgezogene Linien gezeichnet werden
+            // macht aus Stichellinien Durchgezogene von Louis
+            //
+            //
             GL.Begin(PrimitiveType.Lines);
-            GL.Color3(0.930f, 0.2f, 0.2f);
+            GL.Color3(1.0f, 0.0f, 0.0f);
             GL.Vertex3(mf.trk.gArr[mf.trk.idx].endPtA.easting, mf.trk.gArr[mf.trk.idx].endPtA.northing, 0);
             GL.Vertex3(mf.trk.gArr[mf.trk.idx].endPtB.easting, mf.trk.gArr[mf.trk.idx].endPtB.northing, 0);
             GL.End();
@@ -391,19 +398,19 @@ namespace AgOpenGPS
             double cosHL = Math.Cos(abHeading + glm.PIBy2) * (widthMinusOverlap * 0.5 - shadowOffset);
 
             //shadow
-            GL.Color4(0.0745, 0.3137, 0.7098, 0.1);
-            GL.Begin(PrimitiveType.TriangleFan);
-            {
-                GL.Vertex3(currentLinePtA.easting - sinHL, currentLinePtA.northing - cosHL, 0);
-                GL.Vertex3(currentLinePtA.easting + sinHR, currentLinePtA.northing + cosHR, 0);
-                GL.Vertex3(currentLinePtB.easting + sinHR, currentLinePtB.northing + cosHR, 0);
-                GL.Vertex3(currentLinePtB.easting - sinHL, currentLinePtB.northing - cosHR, 0);
-            }
-            GL.End();
+            //       GL.Color4(0.486, 0.694, 0.349, 0.2);
+            //        GL.Begin(PrimitiveType.TriangleFan);
+            //        {
+            //        GL.Vertex3(currentLinePtA.easting - sinHL, currentLinePtA.northing - cosHL, 0);
+            //        GL.Vertex3(currentLinePtA.easting + sinHR, currentLinePtA.northing + cosHR, 0);
+            //        GL.Vertex3(currentLinePtB.easting + sinHR, currentLinePtB.northing + cosHR, 0);
+            //        GL.Vertex3(currentLinePtB.easting - sinHL, currentLinePtB.northing - cosHR, 0);
+            //     }
+            //        GL.End();
 
             //shadow lines
-            GL.Color4(0.0745, 0.3137, 0.7098, 0.1);
-            GL.LineWidth(1);
+            GL.Color4 (0.0, 0.0, 0.0, 0.0);
+            GL.LineWidth(0);
             GL.Begin(PrimitiveType.LineLoop);
             {
                 GL.Vertex3(currentLinePtA.easting - sinHL, currentLinePtA.northing - cosHL, 0);
@@ -414,9 +421,9 @@ namespace AgOpenGPS
             GL.End();
 
             //draw current AB Line
-            GL.LineWidth(lineWidth);
+            GL.LineWidth(8);
             GL.Begin(PrimitiveType.Lines);
-            GL.Color3(0.631f, 0.553f, 0.224f);
+            GL.Color3(0.341f, 0.235f, 0.027f);
             GL.Vertex3(currentLinePtA.easting, currentLinePtA.northing, 0.0);
             GL.Vertex3(currentLinePtB.easting, currentLinePtB.northing, 0.0);
             GL.End();
@@ -429,11 +436,17 @@ namespace AgOpenGPS
                 double cosHeading = Math.Cos(-abHeading);
                 double sinHeading = Math.Sin(-abHeading);
 
-                GL.Color3(0.756f, 0.7650f, 0.7650f);
+                GL.Color3(0.682f, 0.478f, 0.082f);
                 GL.Enable(EnableCap.LineStipple);
                 GL.LineStipple(1, 0x0003);
-
-                GL.LineWidth(1);
+                //
+                //
+                // macht aus Stichellinien Durchgezogene von Louis
+                GL.Disable(EnableCap.LineStipple); // Deaktiviert das Linienstippen, damit durchgezogene Linien gezeichnet werden
+                // macht aus Stichellinien Durchgezogene von Louis
+                //
+                //
+                GL.LineWidth(lineWidth); //macht die linen dicker vorher 1
                 GL.Begin(PrimitiveType.Lines);
 
                 /*
@@ -450,7 +463,7 @@ namespace AgOpenGPS
                     {
                         GL.Vertex3((cosHeading * (toolWidth * i)) + currentLinePtA.easting, (sinHeading * (toolWidth * i)) + currentLinePtA.northing, 0);
                         GL.Vertex3((cosHeading * (toolWidth * i)) + currentLinePtB.easting, (sinHeading * (toolWidth * i)) + currentLinePtB.northing, 0);
-                        
+
                         GL.Vertex3((cosHeading * (-toolWidth * i)) + currentLinePtA.easting, (sinHeading * (-toolWidth * i)) + currentLinePtA.northing, 0);
                         GL.Vertex3((cosHeading * (-toolWidth * i)) + currentLinePtB.easting, (sinHeading * (-toolWidth * i)) + currentLinePtB.northing, 0);
                     }

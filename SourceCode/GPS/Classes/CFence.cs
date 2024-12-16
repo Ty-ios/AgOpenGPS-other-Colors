@@ -62,13 +62,13 @@ namespace AgOpenGPS
         {
             if (!mf.mc.isOutOfBounds)
             {
-                GL.Color3(0.95f, 0.75f, 0.50f);
-                GL.LineWidth(1);
+                GL.Color3(0.0078f, 0.0157f, 0.7686f); //boundary color change by Louis
+                GL.LineWidth(20);
             }
             else
             {
                 GL.LineWidth(mf.ABLine.lineWidth * 3);
-                GL.Color3(0.95f, 0.25f, 0.250f);
+                GL.Color3(0.0078f, 0.0157f, 0.7686f);//boundary color change by Louis
             }
 
             for (int i = 0; i < bndList.Count; i++)
@@ -96,7 +96,7 @@ namespace AgOpenGPS
                 GL.End();
 
                 //line from last point to pivot marker
-                GL.Color3(0.825f, 0.842f, 0.0f);
+                GL.Color3(0.102f, 0.729f, 0.565f); //fendt auqa headland by Louis
                 GL.Enable(EnableCap.LineStipple);
                 GL.LineStipple(1, 0x0700);
                 GL.Begin(PrimitiveType.LineStrip);
